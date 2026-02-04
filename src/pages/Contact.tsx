@@ -14,7 +14,7 @@ const Contact = () => {
     company: z.string().optional(),
     phone: z.string().optional(),
     subject: z.string().min(1, t('contact.form.errorSubject')),
-    message: z.string().min(10, t('contact.form.errorMessage')),
+    message: z.string().min(10, t('contact.errorMessage')),
   });
 
   const [formData, setFormData] = useState({
@@ -46,18 +46,34 @@ const Contact = () => {
       setErrors({});
       setIsSubmitting(true);
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      toast.success(t('contact.form.success'));
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        phone: '',
-        subject: 'general',
-        message: '',
+      // FormSubmit Integration using Fetch API
+      const response = await fetch("https://formsubmit.co/ajax/Witherstex.sarl@gmail.com", {
+        method: "POST",
+        headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            ...formData,
+            _subject: `New Contact Form: ${formData.subject}`,
+            _template: "table" // Formats the email nicely
+        }),
       });
+
+      if (response.ok) {
+        toast.success(t('contact.form.success'));
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          phone: '',
+          subject: 'general',
+          message: '',
+        });
+      } else {
+        throw new Error("Form submission failed");
+      }
+
     } catch (error) {
       if (error instanceof z.ZodError) {
         const newErrors: Record<string, string> = {};
@@ -67,6 +83,8 @@ const Contact = () => {
           }
         });
         setErrors(newErrors);
+      } else {
+        toast.error("An error occurred. Please try again later.");
       }
     } finally {
       setIsSubmitting(false);
@@ -127,6 +145,9 @@ const Contact = () => {
               </h2>
 
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Honeypot for Spam Prevention */}
+                <input type="text" name="_honey" style={{ display: 'none' }} />
+                
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-1">{t('contact.form.name')} *</label>
@@ -137,6 +158,7 @@ const Contact = () => {
                       onChange={handleInputChange}
                       className={`w-full px-4 py-3 border rounded-lg bg-background ${errors.name ? 'border-destructive' : 'border-border'}`}
                       placeholder={t('contact.form.namePlaceholder')}
+                      required
                     />
                     {errors.name && <p className="text-destructive text-sm mt-1">{errors.name}</p>}
                   </div>
@@ -149,6 +171,7 @@ const Contact = () => {
                       onChange={handleInputChange}
                       className={`w-full px-4 py-3 border rounded-lg bg-background ${errors.email ? 'border-destructive' : 'border-border'}`}
                       placeholder={t('contact.form.emailPlaceholder')}
+                      required
                     />
                     {errors.email && <p className="text-destructive text-sm mt-1">{errors.email}</p>}
                   </div>
@@ -205,6 +228,7 @@ const Contact = () => {
                     rows={5}
                     className={`w-full px-4 py-3 border rounded-lg bg-background resize-none ${errors.message ? 'border-destructive' : 'border-border'}`}
                     placeholder={t('contact.form.messagePlaceholder')}
+                    required
                   />
                   {errors.message && <p className="text-destructive text-sm mt-1">{errors.message}</p>}
                 </div>
@@ -220,7 +244,7 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* Contact Info */}
+          {/* Contact Info (Remains the same) */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}

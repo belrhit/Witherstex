@@ -70,7 +70,7 @@ const ProductDetail = () => {
     const message = encodeURIComponent(
       `Bonjour, je suis intéressé par le produit "${product.name}". Pouvez-vous me donner plus d'informations ?`
     );
-    window.open(`https://wa.me/212720736224?text=${message}`, '_blank');
+    window.open(`https://wa.me/212663400034?text=${message}`, '_blank');
   };
 
   const specLabels: Record<string, string> = {
