@@ -1,0 +1,336 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Witherstex Industrial Palette */
+    --background: 0 0% 95%; /* Light Gray #F2F2F2 */
+    --foreground: 0 0% 20%; /* Anthracite #333333 */
+
+    --card: 0 0% 100%; /* Pure White */
+    --card-foreground: 0 0% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 20%;
+
+    /* Primary - Leather/Earth Brown #6B4A2F */
+    --primary: 25 41% 30%;
+    --primary-foreground: 40 30% 92%;
+
+    /* Secondary - Sand/Beige #D9C9B3 */
+    --secondary: 38 36% 78%;
+    --secondary-foreground: 25 41% 25%;
+
+    /* Accent - Petrol Blue #2F586B */
+    --accent: 197 38% 30%;
+    --accent-foreground: 0 0% 98%;
+
+    --muted: 38 20% 90%;
+    --muted-foreground: 0 0% 40%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 38 20% 85%;
+    --input: 38 20% 88%;
+    --ring: 197 38% 30%;
+
+    --radius: 0.375rem;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 20%;
+    --sidebar-foreground: 40 30% 92%;
+    --sidebar-primary: 197 38% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 25%;
+    --sidebar-accent-foreground: 40 30% 92%;
+    --sidebar-border: 0 0% 25%;
+    --sidebar-ring: 197 38% 50%;
+
+    /* Custom tokens */
+    --leather: 25 41% 30%;
+    --leather-light: 25 35% 45%;
+    --sand: 38 36% 78%;
+    --sand-light: 40 30% 92%;
+    --petrol: 197 38% 30%;
+    --petrol-light: 197 35% 45%;
+    --anthracite: 0 0% 20%;
+    --anthracite-light: 0 0% 35%;
+  }
+
+  .dark {
+    --background: 0 0% 10%;
+    --foreground: 40 30% 92%;
+    --card: 0 0% 15%;
+    --card-foreground: 40 30% 92%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 40 30% 92%;
+    --primary: 38 36% 78%;
+    --primary-foreground: 0 0% 15%;
+    --secondary: 25 35% 25%;
+    --secondary-foreground: 40 30% 92%;
+    --accent: 197 45% 50%;
+    --accent-foreground: 0 0% 100%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 65%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 22%;
+    --input: 0 0% 22%;
+    --ring: 197 45% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  /* Hero overlay */
+  .hero-overlay {
+    @apply absolute inset-0 bg-gradient-to-r from-anthracite/80 via-anthracite/60 to-transparent;
+  }
+
+  /* Category card style */
+  .category-card {
+    @apply relative overflow-hidden rounded-lg aspect-[3/4] cursor-pointer;
+  }
+
+  .category-card-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-anthracite/90 via-anthracite/40 to-transparent 
+           transition-all duration-500 group-hover:from-anthracite/95;
+  }
+
+  /* Product card hover */
+  .product-card {
+    @apply bg-card rounded-lg overflow-hidden shadow-sm border border-border/50
+           transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  }
+
+  .product-card-image {
+    @apply aspect-[4/3] overflow-hidden bg-sand-light;
+  }
+
+  .product-card-image img {
+    @apply w-full h-full object-cover transition-transform duration-500;
+  }
+
+  .product-card:hover .product-card-image img {
+    @apply scale-105;
+  }
+
+  /* Tech specs table */
+  .specs-table tr:nth-child(odd) {
+    @apply bg-sand-light/50;
+  }
+
+  .specs-table tr:nth-child(even) {
+    @apply bg-card;
+  }
+
+  /* Parallax section */
+  .parallax-section {
+    @apply relative bg-fixed bg-cover bg-center;
+  }
+
+  .parallax-overlay {
+    @apply absolute inset-0 bg-anthracite/70 backdrop-blur-sm;
+  }
+
+  /* Badge styles */
+  .cert-badge {
+    @apply inline-flex items-center px-2.5 py-1 text-xs font-semibold 
+           bg-petrol text-accent-foreground rounded-sm uppercase tracking-wider;
+  }
+
+  /* Button variants using design system */
+  .btn-primary {
+    @apply bg-accent text-accent-foreground px-6 py-3 font-semibold rounded
+           transition-all duration-300 hover:bg-petrol-light hover:shadow-lg
+           active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply border-2 border-primary text-primary px-6 py-3 font-semibold rounded
+           transition-all duration-300 hover:bg-primary hover:text-primary-foreground
+           active:scale-[0.98];
+  }
+
+  .btn-hero {
+    @apply bg-accent text-accent-foreground px-8 py-4 text-lg font-bold rounded
+           transition-all duration-300 hover:bg-petrol-light hover:shadow-2xl
+           active:scale-[0.98];
+  }
+
+  .btn-hero-outline {
+    @apply border-2 border-sand-light text-sand-light px-8 py-4 text-lg font-bold rounded
+           transition-all duration-300 hover:bg-sand-light hover:text-anthracite
+           active:scale-[0.98];
+  }
+
+  /* Quantity input */
+  .quantity-input {
+    @apply flex items-center border border-border rounded overflow-hidden;
+  }
+
+  .quantity-btn {
+    @apply w-10 h-10 flex items-center justify-center bg-muted hover:bg-secondary
+           transition-colors font-bold text-foreground;
+  }
+
+  .quantity-value {
+    @apply w-14 h-10 text-center font-semibold bg-card border-x border-border;
+  }
+
+  /* Admin table */
+  .admin-table {
+    @apply w-full border-collapse;
+  }
+
+  .admin-table th {
+    @apply bg-anthracite text-sand-light px-4 py-3 text-left font-semibold text-sm uppercase tracking-wider;
+  }
+
+  .admin-table td {
+    @apply px-4 py-3 border-b border-border;
+  }
+
+  .admin-table tbody tr:hover {
+    @apply bg-muted/50;
+  }
+}
+
+@layer utilities {
+  /* Custom color utilities */
+  .bg-leather {
+    background-color: hsl(var(--leather));
+  }
+  .bg-leather-light {
+    background-color: hsl(var(--leather-light));
+  }
+  .bg-sand {
+    background-color: hsl(var(--sand));
+  }
+  .bg-sand-light {
+    background-color: hsl(var(--sand-light));
+  }
+  .bg-petrol {
+    background-color: hsl(var(--petrol));
+  }
+  .bg-petrol-light {
+    background-color: hsl(var(--petrol-light));
+  }
+  .bg-anthracite {
+    background-color: hsl(var(--anthracite));
+  }
+  .bg-anthracite-light {
+    background-color: hsl(var(--anthracite-light));
+  }
+
+  .text-leather {
+    color: hsl(var(--leather));
+  }
+  .text-sand {
+    color: hsl(var(--sand));
+  }
+  .text-sand-light {
+    color: hsl(var(--sand-light));
+  }
+  .text-petrol {
+    color: hsl(var(--petrol));
+  }
+  .text-anthracite {
+    color: hsl(var(--anthracite));
+  }
+
+  .border-leather {
+    border-color: hsl(var(--leather));
+  }
+  .border-sand {
+    border-color: hsl(var(--sand));
+  }
+  .border-petrol {
+    border-color: hsl(var(--petrol));
+  }
+
+  /* Animation utilities */
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-slide-right {
+    animation: slideRight 0.3s ease-out forwards;
+  }
+
+  .animate-slide-left {
+    animation: slideLeft 0.3s ease-out forwards;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideRight {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Staggered animation delays */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+}
