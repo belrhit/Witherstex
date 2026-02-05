@@ -100,12 +100,12 @@ const Footer = () => {
               <p>Casablanca, Maroc</p>
               <p className="pt-2">
                 <a href="https://wa.me/212720736224" className="hover:text-sand-light transition-colors">
-                  +212 720 736 224
+                  +212 695 32 30 14
                 </a>
               </p>
               <p>
                 <a href="mailto:contact@witherstex.com" className="hover:text-sand-light transition-colors">
-                  contact@witherstex.com
+                  Witherstex.sarl@gmail.com
                 </a>
               </p>
             </address>
