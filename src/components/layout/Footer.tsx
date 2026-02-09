@@ -113,24 +113,34 @@ const Footer = () => {
         </div>
 
         {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-anthracite-light">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sand/60 text-sm">
-              © {new Date().getFullYear()} Witherstex. {t('footer.rights')}
-            </p>
-            <div className="flex gap-6">
-              <a href="#" className="text-sand/60 hover:text-sand-light text-sm transition-colors">
-                {t('footer.legal')}
-              </a>
-              <a href="#" className="text-sand/60 hover:text-sand-light text-sm transition-colors">
-                {t('footer.terms')}
-              </a>
-              <a href="#" className="text-sand/60 hover:text-sand-light text-sm transition-colors">
-                {t('footer.privacy')}
-              </a>
-            </div>
-          </div>
-        </div>
+      {/* Bottom */}
+<div className="mt-12 pt-8 border-t border-anthracite-light">
+  <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+    <p className="text-sand/60 text-sm">
+      ©️ {new Date().getFullYear()} Witherstex. {t('footer.rights')} —{" "}
+      <a
+        href="https://www.aymanwebgenius.space/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:text-sand-light underline transition-colors"
+      >
+        créer par AYMAN BELRHIT
+      </a>
+    </p>
+
+    <div className="flex gap-6">
+      <a href="#" className="text-sand/60 hover:text-sand-light text-sm transition-colors">
+        {t('footer.legal')}
+      </a>
+      <a href="#" className="text-sand/60 hover:text-sand-light text-sm transition-colors">
+        {t('footer.terms')}
+      </a>
+      <a href="#" className="text-sand/60 hover:text-sand-light text-sm transition-colors">
+        {t('footer.privacy')}
+      </a>
+    </div>
+  </div>
+</div>
       </div>
     </footer>
   );
